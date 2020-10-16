@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html ng-app="sampleApp">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <script src="https://code.angularjs.org/snapshot/angular.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="/js/index.js"></script>
+        <script type="text/javascript" src="/js/trace.js"></script>
+        <link rel="stylesheet" href="/css/main.css" crossorigin="anonymous">
+        
+    </head>
+    <body>
+        <div>
+            To jest przed
+        </div>
+        <div>
+            <div class="traceUp">
+                <span class="traceStart"></span>
+                <div class="traceLineTop">
+                    <div class="traceElement traceRequest teBorderColor tePolicy  teBasicAuth1"></div>
+
+                    <div class="traceElement traceRequest teBorderColor teCircle"></div>
+
+                    <div class="traceElement traceRequest teBorderColor tePolicy teBasicAuth2"></div>
+
+                    <div class="traceElement traceRequest teBorderColor teFlow"></div>
+                    <div class="traceElement traceRequest teBorderColor teFlowSmall"></div>
+                    
+                    <div class="traceElement traceRequest teBorderColor tePolicy teBasicAuth3"></div>
+                    <div class="traceElement traceRequest teBorderColor teFlowSmall"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth4"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth5"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth6"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth7"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth8"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth9"></div>
+
+                    <div class="traceElement traceRequest tePolicy teBasicAuth10"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth11"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth12"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth13"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth14"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth15"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth16"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth17"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth18"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth19"></div>
+
+                    <div class="traceElement traceRequest tePolicy teBasicAuth20"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth21"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth22"></div>
+                    <div class="traceElement traceRequest tePolicy teBasicAuth23"></div>
+                    
+                    <div style="clear: both"></div>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            <div class="traceBottom">
+                <span class="traceTarget"></span>
+                <div class="traceLineBottom">
+                    <div class="traceElement traceResponse tePolicy teBasicAuth1"></div>
+                    <div class="traceElement traceResponse teCircle"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth2"></div>
+                    <div class="traceElement traceResponse teFlow"></div>
+                    <div class="traceElement traceResponse teFlowSmall"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth3"></div>
+                    <div class="traceElement traceResponse teFlowSmall"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth4"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth5"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth6"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth7"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth8"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth9"></div>
+
+                    <div class="traceElement traceResponse tePolicy teBasicAuth10"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth11"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth12"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth13"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth14"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth15"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth16"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth17"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth18"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth19"></div>
+
+                    <div class="traceElement traceResponse tePolicy teBasicAuth20"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth21"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth22"></div>
+                    <div class="traceElement traceResponse tePolicy teBasicAuth23"></div>
+                    <div style="clear: both"></div>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        TEST2
+        <div ng-controller="TraceController">
+            <div class="traceUp">
+                <span class="traceStart"></span>
+                <div class="traceLineTop">
+                    <span ng-class="['traceElement','traceRequest','teBorderColor',setClass(step)]" ng-repeat="step in traceDataToShow.request" ng-show="showItem(step)" ng-click="selectItem($event,step)"><span>{{getTextFromStep(step)}}</span></span>
+                    <div style="clear: both"></div>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            <div class="traceBottom">
+                <span class="traceTarget"></span>
+                <div class="traceLineBottom">
+                    <span ng-class="['traceElement','traceResponse','teBorderColor',setClass(step)]" ng-repeat="step in traceDataToShow.response" ng-show="showItem(step)" ng-click="selectItem($event,step)"><span>{{getTextFromStep(step)}}</span></span>
+<!--                    <span class="traceElement traceResponse teBorderColor" ng-repeat="step in traceDataToShow.response" ng-click="selectItem($event,step)"></span>-->
+                    <div style="clear: both"></div>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            !!!SELECTED STEP
+            <div><pre>{{selectedStep|json}}</pre></div>
+            !!!REQUEST
+            <div><pre>{{traceDataToShow.request|json}}</pre></div>
+            !!!RESPONSE
+            <div><pre>{{traceDataToShow.response|json}}</pre></div>
+        </div>        
+    </body>
+</html>
