@@ -100,10 +100,20 @@
         </div>
         TEST2
         <div ng-controller="TraceController">
+            <ul class="list-group" role="group">
+                <span ng-repeat="(key, value) in allPoints" ng-class="['list-group-item',allPoints[key].visible?'active':'']" style="cursor: pointer; width: 200px; float: left" ng-model="allPoints[key].visible" ng-click="allPoints[key].visible=!allPoints[key].visible">{{key}}</span>
+            </ul>
+            <div style="clear: both"></div>
             <div class="traceUp">
                 <span class="traceStart"></span>
                 <div class="traceLineTop">
-                    <span ng-class="['traceElement','traceRequest','teBorderColor',setClass(step)]" ng-repeat="step in traceDataToShow.request" ng-show="showItem(step)" ng-click="selectItem($event,step)"><span>{{getTextFromStep(step)}}</span></span>
+                    <span ng-class="['traceElement','traceRequest','teBorderColor',setClass(step)]" 
+                          ng-repeat="step in traceDataToShow.request" 
+                          ng-show="showItem(step)" 
+                          ng-click="selectItem($event,step)"
+                          >
+                        <span>{{getTextFromStep(step)}}</span>                        
+                    </span>
                     <div style="clear: both"></div>
                 </div>
                 <div style="clear: both"></div>
@@ -116,6 +126,111 @@
                     <div style="clear: both"></div>
                 </div>
                 <div style="clear: both"></div>
+            </div>
+            <div>
+                <h4></h4>
+                <div class="card">
+                    <div class="card-header">{{selectedStep.id}} <span ng-show="selectedStep.DebugInfo!=null">{{selectedStep.DebugInfo.Timestamp}}</span></div>
+                    <div class="card-body">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="variables" data-toggle="tab" href="#variablesInfoTab" role="tab" aria-controls="variablesInfoTab" aria-selected="true">Variables</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="debug" data-toggle="tab" href="#debugInfoTab" role="tab" aria-controls="debugInfoTab" aria-selected="true">Debug info</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content mt-1" id="myTabContent">
+                            <div class="tab-pane fade show active" id="variablesInfoTab" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="card">
+                                    <div class="card-header">Variables</div>
+                                    <div class="card-body">
+                                        <h6>GET</h6>
+                                        <table class="table table-sm table-striped">
+                                            <tr ng-repeat="variable in selectedStep.VariableAccess.Get">
+                                                <th>{{variable.name}}</th>
+                                                <td>&nbsp;</td>
+                                                <td>{{variable.value}}</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                        <h6>SET</h6>
+                                        <div ng-show="selectedStep.VariableAccess.Set!=null">
+                                            <table class="table table-sm table-striped">
+                                                <tr>
+                                                    <th>{{selectedStep.VariableAccess.Set.name}}</th>
+                                                    <td>{{selectedStep.VariableAccess.Set.value}}</td>
+                                                    <td>{{selectedStep.VariableAccess.Set.success}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="debugInfoTab" role="tabpanel" aria-labelledby="home-tab" >
+                                <div class="card">
+                                    <div class="card-header">
+                                        Debug Info
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-sm table-striped">
+                                            <tr ng-repeat="debugInfo in selectedStep.DebugInfo.Properties.Property">
+                                                <th>{{debugInfo.name}}</th>
+                                                <td>{{debugInfo.text}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card" ng-show="selectedStep.RequestMessage!=null">
+                            <div class="card-header">Request</div>
+                            <div class="card-body">
+                                <div class="alert alert-primary">
+                                    <span>{{selectedStep.RequestMessage.Verb}}</span>
+                                    <span>{{selectedStep.RequestMessage.URI}}</span>
+                                </div>
+                                <div class="card" ng-show="selectedStep.RequestMessage.Headers!=null && selectedStep.RequestMessage.Headers.Header.length>0">
+                                    <div class="card-header">
+                                        Request Headers
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-sm table-striped">
+                                            <tr ng-repeat="header in selectedStep.RequestMessage.Headers.Header">
+                                                <th>{{header.name}}</th>
+                                                <td>{{header.text}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" ng-show="selectedStep.ResponseMessage!=null">
+                            <div class="card-header">Response</div>
+                            <div class="card-body">
+                                <div class="alert alert-primary">
+                                    <span>{{selectedStep.ResponseMessage.ReasonPhrase}}</span>
+                                    <span>{{selectedStep.ResponseMessage.StatusCode}}</span>
+                                </div>
+                                <div class="card" ng-show="selectedStep.ResponseMessage.Headers!=null && selectedStep.ResponseMessage.Headers.Header.length>0">
+                                    <div class="card-header">
+                                        Header
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-sm table-striped">
+                                            <tr ng-repeat="header in selectedStep.ResponseMessage.Headers.Header">
+                                                <th>{{header.name}}</th>
+                                                <td>{{header.text}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
             !!!SELECTED STEP
             <div><pre>{{selectedStep|json}}</pre></div>
